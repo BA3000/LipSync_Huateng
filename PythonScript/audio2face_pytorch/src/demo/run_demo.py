@@ -302,7 +302,7 @@ async def ws_sent_bs_json_data(websocket, path):
 
         with open(json_bs_file, "r", encoding="utf-8") as f:
             f_num = 0
-            threading._start_new_thread(play_wav, (wav_path,))
+            # threading._start_new_thread(play_wav, (wav_path,))
             time.sleep(0.15)
             f_btime = time.time()
             for line in f.readlines():
@@ -338,7 +338,7 @@ def sent_bs_json_data():
 
         with open(json_bs_file, "r", encoding="utf-8") as f:
             f_num = 0
-            threading._start_new_thread(play_wav, (wav_path,))
+            # threading._start_new_thread(play_wav, (wav_path,))
             time.sleep(0.15)
             f_btime = time.time()
             for line in f.readlines():
