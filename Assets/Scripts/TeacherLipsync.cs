@@ -85,31 +85,31 @@ public class TeacherLipsync : MonoBehaviour
     private void UpdateFace()
     {
         // jawOpen
-        targetBlendShapeObject.SetBlendShapeWeight(femailTeacherBSIdx["jawOpen"], bsValues[33] * 1.1f);
+        targetBlendShapeObject.SetBlendShapeWeight(femailTeacherBSIdx["jawOpen"], bsValues[33] * 1.1f * 10.0f);
         // mouthFunnel
         // targetBlendShapeObject.SetBlendShapeWeight(femailTeacherBSIdx["mouthFunnel"], bsValues[31]);
         // mouthPucker
         // targetBlendShapeObject.SetBlendShapeWeight(femailTeacherBSIdx["mouthPucker"], bsValues[28]);
         // mouthShrugUpper
-        targetBlendShapeObject.SetBlendShapeWeight(femailTeacherBSIdx["mouthShrugUpper"], bsValues[27]);
+        targetBlendShapeObject.SetBlendShapeWeight(femailTeacherBSIdx["mouthShrugUpper"], bsValues[27] * 10.0f);
         // mouthShrugLower
-        targetBlendShapeObject.SetBlendShapeWeight(femailTeacherBSIdx["mouthShrugLower"], bsValues[26]);
+        targetBlendShapeObject.SetBlendShapeWeight(femailTeacherBSIdx["mouthShrugLower"], bsValues[26] * 10.0f);
         // mouthRollLower
-        targetBlendShapeObject.SetBlendShapeWeight(femailTeacherBSIdx["mouthRollLower"], bsValues[34]);
+        targetBlendShapeObject.SetBlendShapeWeight(femailTeacherBSIdx["mouthRollLower"], bsValues[34] * 10.0f);
         // mouthRollUpper
-        targetBlendShapeObject.SetBlendShapeWeight(femailTeacherBSIdx["mouthRollUpper"], bsValues[35]);
+        targetBlendShapeObject.SetBlendShapeWeight(femailTeacherBSIdx["mouthRollUpper"], bsValues[35] * 10.0f);
         // mouthUpperUpLeft
-        targetBlendShapeObject.SetBlendShapeWeight(femailTeacherBSIdx["mouthUpperUpLeft"], bsValues[14]);
+        targetBlendShapeObject.SetBlendShapeWeight(femailTeacherBSIdx["mouthUpperUpLeft"], bsValues[14] * 10.0f);
         // mouthUpperUpRight
         // targetBlendShapeObject.SetBlendShapeWeight(9, bsValues[15]);
-        targetBlendShapeObject.SetBlendShapeWeight(femailTeacherBSIdx["mouthUpperUpRight"], bsValues[14]);
+        targetBlendShapeObject.SetBlendShapeWeight(femailTeacherBSIdx["mouthUpperUpRight"], bsValues[14] * 10.0f);
         // mouthStretchLeft
-        targetBlendShapeObject.SetBlendShapeWeight(femailTeacherBSIdx["mouthStretchLeft"], bsValues[29] * 0.8f);
+        targetBlendShapeObject.SetBlendShapeWeight(femailTeacherBSIdx["mouthStretchLeft"], bsValues[29] * 0.8f * 10.0f);
         // mouthStretchRight
         // targetBlendShapeObject.SetBlendShapeWeight(11, bsValues[30]);
-        targetBlendShapeObject.SetBlendShapeWeight(femailTeacherBSIdx["mouthStretchRight"], bsValues[29] * 0.8f);
+        targetBlendShapeObject.SetBlendShapeWeight(femailTeacherBSIdx["mouthStretchRight"], bsValues[29] * 0.8f * 10.0f);
         // mouthSmileLeft
-        targetBlendShapeObject.SetBlendShapeWeight(femailTeacherBSIdx["mouthSmileLeft"], bsValues[18]);
+        targetBlendShapeObject.SetBlendShapeWeight(femailTeacherBSIdx["mouthSmileLeft"], bsValues[18] * 10.0f);
         // mouthSmileRight
         // targetBlendShapeObject.SetBlendShapeWeight(13, bsValues[19]);
         targetBlendShapeObject.SetBlendShapeWeight(femailTeacherBSIdx["mouthSmileRight"], bsValues[18]);
