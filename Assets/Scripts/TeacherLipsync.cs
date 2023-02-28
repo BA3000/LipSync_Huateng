@@ -22,8 +22,12 @@ public class TeacherLipsync : MonoBehaviour
 
     [SerializeField]
     private SkinnedMeshRenderer targetBlendShapeObject;
+
     [SerializeField]
     private string[] propertyNames = new string[MAXBlendValueCount];
+
+    [SerializeField]
+    private float[] propertyScales = new float[MAXBlendValueCount];
 
     [SerializeField]
     private VideoPlayer videoPlayer;
@@ -42,7 +46,11 @@ public class TeacherLipsync : MonoBehaviour
 
     private Dictionary<Socket, ClientState> clients = new Dictionary<Socket, ClientState>();
 
-    private Dictionary<string, int> femaleTeacherBSIdx = new Dictionary<string, int>();
+    // bs idx
+    private Dictionary<string, int> femaleTeacherBSIdxDict = new Dictionary<string, int>();
+
+    // bs scale
+    private Dictionary<string, float> femaleTeacherBSScaleDict = new Dictionary<string, float>();
 
     // Start is called before the first frame update
     private void Start()
@@ -50,7 +58,8 @@ public class TeacherLipsync : MonoBehaviour
         Debug.Log("Test Started!");
         // set bs idx by string array
         for (int i = 0; i < propertyNames.Length; ++i) {
-            femaleTeacherBSIdx[propertyNames[i]] = i;
+            femaleTeacherBSIdxDict[propertyNames[i]] = i;
+            femaleTeacherBSScaleDict[propertyNames[i]] = propertyScales[i];
         }
 
         // set initial bs values
@@ -76,34 +85,34 @@ public class TeacherLipsync : MonoBehaviour
     private void UpdateFace()
     {
         // jawOpen
-        targetBlendShapeObject.SetBlendShapeWeight(femaleTeacherBSIdx["jawOpen"], bsValues[33] * 1.1f * 10.0f);
+        targetBlendShapeObject.SetBlendShapeWeight(femaleTeacherBSIdxDict["jawOpen"], bsValues[33] * femaleTeacherBSScaleDict["jawOpen"]);
         // mouthFunnel
-        // targetBlendShapeObject.SetBlendShapeWeight(femaleTeacherBSIdx["mouthFunnel"], bsValues[31]);
+        // targetBlendShapeObject.SetBlendShapeWeight(femaleTeacherBSIdxDict["mouthFunnel"], bsValues[31] * femaleTeacherBSScaleDict["mouthFunnel"]);
         // mouthPucker
-        // targetBlendShapeObject.SetBlendShapeWeight(femaleTeacherBSIdx["mouthPucker"], bsValues[28]);
+        // targetBlendShapeObject.SetBlendShapeWeight(femaleTeacherBSIdxDict["mouthPucker"], bsValues[28] * femaleTeacherBSScaleDict["mouthPucker"]);
         // mouthShrugUpper
-        targetBlendShapeObject.SetBlendShapeWeight(femaleTeacherBSIdx["mouthShrugUpper"], bsValues[27] * 10.0f);
+        targetBlendShapeObject.SetBlendShapeWeight(femaleTeacherBSIdxDict["mouthShrugUpper"], bsValues[27] * femaleTeacherBSScaleDict["mouthShrugUpper"]);
         // mouthShrugLower
-        targetBlendShapeObject.SetBlendShapeWeight(femaleTeacherBSIdx["mouthShrugLower"], bsValues[26] * 10.0f);
+        targetBlendShapeObject.SetBlendShapeWeight(femaleTeacherBSIdxDict["mouthShrugLower"], bsValues[26] * femaleTeacherBSScaleDict["mouthShrugLower"]);
         // mouthRollLower
-        targetBlendShapeObject.SetBlendShapeWeight(femaleTeacherBSIdx["mouthRollLower"], bsValues[34] * 10.0f);
+        targetBlendShapeObject.SetBlendShapeWeight(femaleTeacherBSIdxDict["mouthRollLower"], bsValues[34] * femaleTeacherBSScaleDict["mouthRollLower"]);
         // mouthRollUpper
-        targetBlendShapeObject.SetBlendShapeWeight(femaleTeacherBSIdx["mouthRollUpper"], bsValues[35] * 10.0f);
+        targetBlendShapeObject.SetBlendShapeWeight(femaleTeacherBSIdxDict["mouthRollUpper"], bsValues[35] * femaleTeacherBSScaleDict["mouthRollUpper"]);
         // mouthUpperUpLeft
-        targetBlendShapeObject.SetBlendShapeWeight(femaleTeacherBSIdx["mouthUpperUpLeft"], bsValues[14] * 10.0f);
+        targetBlendShapeObject.SetBlendShapeWeight(femaleTeacherBSIdxDict["mouthUpperUpLeft"], bsValues[14] * femaleTeacherBSScaleDict["mouthUpperUpLeft"]);
         // mouthUpperUpRight
-        // targetBlendShapeObject.SetBlendShapeWeight(9, bsValues[15]);
-        targetBlendShapeObject.SetBlendShapeWeight(femaleTeacherBSIdx["mouthUpperUpRight"], bsValues[14] * 10.0f);
+        // targetBlendShapeObject.SetBlendShapeWeight(9, bsValues[15] * femaleTeacherBSScaleDict["mouthUpperUpRight"]);
+        targetBlendShapeObject.SetBlendShapeWeight(femaleTeacherBSIdxDict["mouthUpperUpRight"], bsValues[14] * femaleTeacherBSScaleDict["mouthUpperUpRight"]);
         // mouthStretchLeft
-        targetBlendShapeObject.SetBlendShapeWeight(femaleTeacherBSIdx["mouthStretchLeft"], bsValues[29] * 0.8f * 10.0f);
+        targetBlendShapeObject.SetBlendShapeWeight(femaleTeacherBSIdxDict["mouthStretchLeft"], bsValues[29] * femaleTeacherBSScaleDict["mouthStretchLeft"]);
         // mouthStretchRight
-        // targetBlendShapeObject.SetBlendShapeWeight(11, bsValues[30]);
-        targetBlendShapeObject.SetBlendShapeWeight(femaleTeacherBSIdx["mouthStretchRight"], bsValues[29] * 0.8f * 10.0f);
+        // targetBlendShapeObject.SetBlendShapeWeight(11, bsValues[30] * femaleTeacherBSScaleDict["mouthStretchRight"]);
+        targetBlendShapeObject.SetBlendShapeWeight(femaleTeacherBSIdxDict["mouthStretchRight"], bsValues[29] * femaleTeacherBSScaleDict["mouthStretchRight"]);
         // mouthSmileLeft
-        targetBlendShapeObject.SetBlendShapeWeight(femaleTeacherBSIdx["mouthSmileLeft"], bsValues[18] * 10.0f);
+        targetBlendShapeObject.SetBlendShapeWeight(femaleTeacherBSIdxDict["mouthSmileLeft"], bsValues[18] * femaleTeacherBSScaleDict["mouthSmileLeft"]);
         // mouthSmileRight
-        // targetBlendShapeObject.SetBlendShapeWeight(13, bsValues[19]);
-        targetBlendShapeObject.SetBlendShapeWeight(femaleTeacherBSIdx["mouthSmileRight"], bsValues[18]);
+        // targetBlendShapeObject.SetBlendShapeWeight(13, bsValues[19] * femaleTeacherBSScaleDict["mouthSmileRight"]);
+        targetBlendShapeObject.SetBlendShapeWeight(femaleTeacherBSIdxDict["mouthSmileRight"], bsValues[18] * femaleTeacherBSScaleDict["mouthSmileRight"]);
     }
 
     private void DeserializeExpressList(ref string jsonTxt)
