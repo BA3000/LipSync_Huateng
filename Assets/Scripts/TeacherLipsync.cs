@@ -98,21 +98,21 @@ public class TeacherLipsync : MonoBehaviour
         targetBlendShapeObject.SetBlendShapeWeight(femaleTeacherBSIdxDict["mouthRollLower"], bsValues[34] * femaleTeacherBSScaleDict["mouthRollLower"]);
         // mouthRollUpper
         targetBlendShapeObject.SetBlendShapeWeight(femaleTeacherBSIdxDict["mouthRollUpper"], bsValues[35] * femaleTeacherBSScaleDict["mouthRollUpper"]);
+
         // mouthUpperUpLeft
         targetBlendShapeObject.SetBlendShapeWeight(femaleTeacherBSIdxDict["mouthUpperUpLeft"], bsValues[14] * femaleTeacherBSScaleDict["mouthUpperUpLeft"]);
         // mouthUpperUpRight
-        // targetBlendShapeObject.SetBlendShapeWeight(9, bsValues[15] * femaleTeacherBSScaleDict["mouthUpperUpRight"]);
-        targetBlendShapeObject.SetBlendShapeWeight(femaleTeacherBSIdxDict["mouthUpperUpRight"], bsValues[14] * femaleTeacherBSScaleDict["mouthUpperUpRight"]);
+        targetBlendShapeObject.SetBlendShapeWeight(femaleTeacherBSIdxDict["mouthUpperUpRight"], bsValues[14] * femaleTeacherBSScaleDict["mouthUpperUpLeft"]);
+
         // mouthStretchLeft
         targetBlendShapeObject.SetBlendShapeWeight(femaleTeacherBSIdxDict["mouthStretchLeft"], bsValues[29] * femaleTeacherBSScaleDict["mouthStretchLeft"]);
         // mouthStretchRight
-        // targetBlendShapeObject.SetBlendShapeWeight(11, bsValues[30] * femaleTeacherBSScaleDict["mouthStretchRight"]);
-        targetBlendShapeObject.SetBlendShapeWeight(femaleTeacherBSIdxDict["mouthStretchRight"], bsValues[29] * femaleTeacherBSScaleDict["mouthStretchRight"]);
+        targetBlendShapeObject.SetBlendShapeWeight(femaleTeacherBSIdxDict["mouthStretchRight"], bsValues[29] * femaleTeacherBSScaleDict["mouthStretchLeft"]);
         // mouthSmileLeft
+
         targetBlendShapeObject.SetBlendShapeWeight(femaleTeacherBSIdxDict["mouthSmileLeft"], bsValues[18] * femaleTeacherBSScaleDict["mouthSmileLeft"]);
         // mouthSmileRight
-        // targetBlendShapeObject.SetBlendShapeWeight(13, bsValues[19] * femaleTeacherBSScaleDict["mouthSmileRight"]);
-        targetBlendShapeObject.SetBlendShapeWeight(femaleTeacherBSIdxDict["mouthSmileRight"], bsValues[18] * femaleTeacherBSScaleDict["mouthSmileRight"]);
+        targetBlendShapeObject.SetBlendShapeWeight(femaleTeacherBSIdxDict["mouthSmileRight"], bsValues[18] * femaleTeacherBSScaleDict["mouthSmileLeft"]);
     }
 
     private void DeserializeExpressList(ref string jsonTxt)
