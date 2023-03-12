@@ -6,7 +6,7 @@ PythonScript 保存的是深度模型，先运行 Unity 项目，后运行 Pytho
 
 ``` shell
 cd PythonScript/autio2face_pytorch
-python ./src/demorun_demo.py --only_bs_data
+python ./src/demo/run_demo.py --only_bs_data
 ```
 
 每次运行 Unity 预览前都需要先运行上述指令。
