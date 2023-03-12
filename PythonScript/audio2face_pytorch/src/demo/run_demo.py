@@ -27,9 +27,6 @@ from src.demo.wav_2_lpc import get_audio_frames
 from src.demo.animation_convertor import AnimationConvertor
 from src.demo.lpc_2_weight import inference_batch, SoundAnimation
 
-import websockets
-import asyncio
-
 warnings.filterwarnings("ignore")
 
 
