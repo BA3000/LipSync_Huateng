@@ -5,7 +5,7 @@
 PythonScript 保存的是深度模型，先运行 Unity 项目，后运行 Python 脚本：
 
 ``` shell
-cd PythonScript/autio2face_pytorch
+cd PythonScript/audio2face_pytorch
 python ./src/demo/run_demo.py --only_bs_data
 ```
 
