@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,8 +14,8 @@ namespace LipSync
 
 
         public ERecognizerLanguage recognizerLanguage;
-        public SkinnedMeshRenderer targetBlendShapeObject;
-        public string[] propertyNames = new string[MAX_BLEND_VALUE_COUNT];
+        public Animator targetAnimator;
+        public string[] visemePropNames = new string[MAX_BLEND_VALUE_COUNT];
         public float propertyMinValue = 0.0f;
         public float propertyMaxValue = 100.0f;
 
@@ -26,13 +26,12 @@ namespace LipSync
         protected LipSyncRuntimeRecognizer runtimeRecognizer;
         protected string[] currentVowels;
         protected Dictionary<string, int> vowelToIndexDict = new Dictionary<string, int>();
-        protected int[] propertyIndexs = new int[MAX_BLEND_VALUE_COUNT];
+        protected string[] propertyNames = new string[MAX_BLEND_VALUE_COUNT];
 
         protected string recognizeResult;
+        protected string lastRecognizeResult;
         protected float[] targetBlendValues = new float[MAX_BLEND_VALUE_COUNT];
         protected float[] currentBlendValues = new float[MAX_BLEND_VALUE_COUNT];
-        private Visualization visualization;
-        public Text recognizeText;
 
 
         public void InitializeRecognizer()
@@ -49,10 +48,9 @@ namespace LipSync
             for (int i = 0; i < currentVowels.Length; ++i)
             {
                 vowelToIndexDict[currentVowels[i]] = i;
-                propertyIndexs[i] = targetBlendShapeObject.sharedMesh.GetBlendShapeIndex(propertyNames[i]);
+                propertyNames[i] = visemePropNames[i];
             }
             runtimeRecognizer = new LipSyncRuntimeRecognizer(recognizerLanguage, windowSize, amplitudeThreshold);
-            visualization = new Visualization();
         }
 
         void OnValidate()
@@ -62,27 +60,23 @@ namespace LipSync
             moveTowardsSpeed = Mathf.Clamp(moveTowardsSpeed, 5, 25);
         }
 
-
         protected void UpdateForward()
         {
-            for (int i = 0; i < targetBlendValues.Length; ++i)
-            {
-                targetBlendValues[i] = 0.0f;
-            }
             if (recognizeResult != null)
             {
-                targetBlendValues[vowelToIndexDict[recognizeResult]] = 1.0f;
+                targetAnimator.CrossFadeInFixedTime(propertyNames[vowelToIndexDict[recognizeResult]], 0.05f, 1);
+                Debug.Log(propertyNames[vowelToIndexDict[recognizeResult]]);
             }
-            for (int k = 0; k < currentBlendValues.Length; ++k)
+            else
             {
-                if (propertyIndexs[k] != -1)
+                Debug.Log(recognizeResult);
+                if (lastRecognizeResult == recognizeResult)
                 {
-                    currentBlendValues[k] = Mathf.MoveTowards(currentBlendValues[k], targetBlendValues[k], moveTowardsSpeed * Time.deltaTime);
-                    targetBlendShapeObject.SetBlendShapeWeight(propertyIndexs[k], Mathf.Lerp(propertyMinValue, propertyMaxValue, currentBlendValues[k]));
+                    targetAnimator.CrossFadeInFixedTime("Default", 0f, 1);
                 }
+                targetAnimator.CrossFadeInFixedTime("Default", 0.05f, 1);
             }
-            visualization.Update(runtimeRecognizer.playingAudioSpectrum);
-            if (recognizeText) recognizeText.text = "RecognizeResult: " + recognizeResult;
+            lastRecognizeResult = recognizeResult;
         }
     }
 

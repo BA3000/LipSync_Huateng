@@ -1,4 +1,4 @@
-﻿using UnityEditor;
+using UnityEditor;
 using UnityEngine;
 
 namespace LipSync.Editor
@@ -63,60 +63,60 @@ namespace LipSync.Editor
     }
 
 
-    [CustomEditor(typeof(AudioLipSync))]
-    [CanEditMultipleObjects]
-    public class AudioLipSyncEditor : LipSyncEditor
-    {
+    //    [CustomEditor(typeof(FFTAnimLipSync))]
+    //    [CanEditMultipleObjects]
+    //    public class AudioLipSyncEditor : LipSyncEditor
+    //    {
 
-        public override void OnInspectorGUI()
-        {
-            AudioLipSync targetLipSync = (AudioLipSync)target;
-            serializedObject.UpdateIfRequiredOrScript();
+    //        public override void OnInspectorGUI()
+    //        {
+    //            FFTAnimLipSync targetLipSync = (FFTAnimLipSync)target;
+    //            serializedObject.UpdateIfRequiredOrScript();
 
-            EditorGUILayout.PropertyField(serializedObject.FindProperty("lipSyncMethod"));
-            EditorGUILayout.PropertyField(serializedObject.FindProperty("audioSource"));
-           
-            EditorGUILayout.Space();
-            if (targetLipSync.lipSyncMethod == ELipSyncMethod.Runtime)
-            {
-                GUIVowel(targetLipSync);
-                GUIAdvanceOptions(targetLipSync);
-            }
-            else if (targetLipSync.lipSyncMethod == ELipSyncMethod.Baked)
-            {
-                EditorGUILayout.PropertyField(serializedObject.FindProperty("targetAnimator"));
+    //            EditorGUILayout.PropertyField(serializedObject.FindProperty("lipSyncMethod"));
+    //            EditorGUILayout.PropertyField(serializedObject.FindProperty("audioSource"));
 
-                if (GUILayout.Button("LipSync Baker") == true)
-                {
-                    BakingEditorWindow window = EditorWindow.GetWindow<BakingEditorWindow>("LipSync Baker");
-                    window.Show();
-                }
-            }
+    //            EditorGUILayout.Space();
+    //            if (targetLipSync.lipSyncMethod == ELipSyncMethod.Runtime)
+    //            {
+    //                GUIVowel(targetLipSync);
+    //                GUIAdvanceOptions(targetLipSync);
+    //            }
+    //            else if (targetLipSync.lipSyncMethod == ELipSyncMethod.Baked)
+    //            {
+    //                EditorGUILayout.PropertyField(serializedObject.FindProperty("targetAnimator"));
 
-            serializedObject.ApplyModifiedProperties();
-        }
-    }
+    //                if (GUILayout.Button("LipSync Baker") == true)
+    //                {
+    //                    BakingEditorWindow window = EditorWindow.GetWindow<BakingEditorWindow>("LipSync Baker");
+    //                    window.Show();
+    //                }
+    //            }
 
-#if FMOD_LIVEUPDATE
-    [CustomEditor(typeof(FmodLipSync))]
-    [CanEditMultipleObjects]
-    public class FmodLipSyncEditor : LipSyncEditor
-    {
+    //            serializedObject.ApplyModifiedProperties();
+    //        }
+    //    }
 
-        public override void OnInspectorGUI()
-        {
-            FmodLipSync targetLipSync = (FmodLipSync)target;
-            serializedObject.UpdateIfRequiredOrScript();
+    //#if FMOD_LIVEUPDATE
+    //    [CustomEditor(typeof(FmodLipSync))]
+    //    [CanEditMultipleObjects]
+    //    public class FmodLipSyncEditor : LipSyncEditor
+    //    {
 
-            EditorGUILayout.PropertyField(serializedObject.FindProperty("emiter"));
-            EditorGUILayout.PropertyField(serializedObject.FindProperty("save"));
-            EditorGUILayout.Space();
-            
-            GUIVowel(targetLipSync);
-            GUIAdvanceOptions(targetLipSync);
+    //        public override void OnInspectorGUI()
+    //        {
+    //            FmodLipSync targetLipSync = (FmodLipSync)target;
+    //            serializedObject.UpdateIfRequiredOrScript();
 
-            serializedObject.ApplyModifiedProperties();
-        }
-    }
-#endif
+    //            EditorGUILayout.PropertyField(serializedObject.FindProperty("emiter"));
+    //            EditorGUILayout.PropertyField(serializedObject.FindProperty("save"));
+    //            EditorGUILayout.Space();
+
+    //            GUIVowel(targetLipSync);
+    //            GUIAdvanceOptions(targetLipSync);
+
+    //            serializedObject.ApplyModifiedProperties();
+    //        }
+    //    }
+    //#endif
 }

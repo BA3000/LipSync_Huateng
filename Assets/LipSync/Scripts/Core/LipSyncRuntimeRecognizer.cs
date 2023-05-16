@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Runtime.InteropServices;
 using UnityEngine;
 
@@ -45,10 +45,9 @@ namespace LipSync
         public string RecognizeByAudioSource(AudioSource audioSource, FFTWindow window)
         {
             string result = null;
-            audioSource.GetSpectrumData(playingAudioSpectrum, 0, window);
-
             if (audioSource.isPlaying)
             {
+                audioSource.GetSpectrumData(playingAudioSpectrum, 0, window);
                 Recognize(ref result, audioSource.clip.frequency);
             }
             return result;
