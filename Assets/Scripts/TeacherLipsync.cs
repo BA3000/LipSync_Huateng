@@ -92,7 +92,7 @@ namespace TeachLipSync
         private Dictionary<string, float> femaleTeacherBSScaleDict = new Dictionary<string, float>();
         private Dictionary<string, float> femaleTeacherBSThresDict = new Dictionary<string, float>();
 
-        private int[] arrBSDataIdx = { 33, 27, 26, 34, 35, 14, 14, 29, 29, 18, 18 };
+        private int[] arrBSDataIdx = { 33, 31, 28, 27, 26, 14, 14, 29, 29, 35, 34, 18, 19 };
 
         // Start is called before the first frame update
         private void Start()
@@ -175,13 +175,19 @@ namespace TeachLipSync
             {
                 if (propertyNames[i] == "jawOpen")
                 {
-                    targetBlendShapeObject.SetBlendShapeWeight(femaleTeacherBSIdxDict[propertyNames[i]],
-                        BSCalcWithUpperBound(bsValues[arrBSDataIdx[i]], femaleTeacherBSScaleDict[propertyNames[i]], femaleTeacherBSThresDict[propertyNames[i]], 0, 100));
+                    string tmp = propertyNames[i];
+                    int idx = femaleTeacherBSIdxDict[tmp];
+                    float scale = femaleTeacherBSScaleDict[tmp];
+                    float thres = femaleTeacherBSThresDict[tmp];
+                    targetBlendShapeObject.SetBlendShapeWeight(idx, BSCalcWithUpperBound(bsValues[arrBSDataIdx[i]], scale, thres, 0, 100));
                 }
                 else
                 {
-                    targetBlendShapeObject.SetBlendShapeWeight(femaleTeacherBSIdxDict[propertyNames[i]],
-                        BSCalc(bsValues[arrBSDataIdx[i]], femaleTeacherBSScaleDict[propertyNames[i]], femaleTeacherBSThresDict[propertyNames[i]], 0, 100));
+                    string tmp = propertyNames[i];
+                    int idx = femaleTeacherBSIdxDict[tmp];
+                    float scale = femaleTeacherBSScaleDict[tmp];
+                    float thres = femaleTeacherBSThresDict[tmp];
+                    targetBlendShapeObject.SetBlendShapeWeight(idx, BSCalc(bsValues[arrBSDataIdx[i]], scale, thres, 0, 100));
                 }
             }
         }
