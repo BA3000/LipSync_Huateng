@@ -92,7 +92,7 @@ namespace TeachLipSync
         private Dictionary<string, float> femaleTeacherBSScaleDict = new Dictionary<string, float>();
         private Dictionary<string, float> femaleTeacherBSThresDict = new Dictionary<string, float>();
 
-        private int[] arrBSDataIdx = { 33, 31, 28, 27, 26, 14, 14, 29, 29, 35, 34, 18, 19 };
+        public int[] arrBSDataIdx = { 33, 31, 28, 27, 26, 14, 14, 29, 29, 35, 34, 18, 18 };
 
         // Start is called before the first frame update
         private void Start()
