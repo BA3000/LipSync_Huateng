@@ -1,14 +1,23 @@
+using System.Text.RegularExpressions;
+using System.Threading;
+using System.Diagnostics;
 using System;
 using System.Net;
 using UnityEngine;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System.Net.Sockets;
 using System.Collections.Generic;
-using Newtonsoft.Json.Linq;
 using UnityEngine.Video;
 
 namespace TeachLipSync
 {
+    public enum ELsMode
+    {
+        None = 0,
+        Offline = 1,
+        Online = 2
+    }
 
     class ClientState
     {
@@ -28,6 +37,7 @@ namespace TeachLipSync
 
     public class TeacherLipsync : MonoBehaviour
     {
+#region configs
         public float moveTowardsSpeed = 8;
         /// <summary>
         /// BS 可以取的最小值
@@ -37,6 +47,18 @@ namespace TeachLipSync
         /// BS 最大值
         /// </summary>
         public float propertyMaxValue = 100.0f;
+
+        /// <summary>
+        /// 是否读取本地离线数据
+        /// </summary>
+        [SerializeField]
+        private ELsMode lsMode = ELsMode.Offline;
+
+        /// <summary>
+        /// 数据的FPS
+        /// </summary>
+        private float dataFrameInterval = 1.0f / 30f;
+#endregion
 
         /// <summary>
         /// 要更新的对象
@@ -94,6 +116,8 @@ namespace TeachLipSync
 
         public int[] arrBSDataIdx = { 33, 31, 28, 27, 26, 14, 14, 29, 29, 35, 34, 18, 18 };
 
+        private float timeElapsed = 0.0f;
+
         // Start is called before the first frame update
         private void Start()
         {
@@ -111,7 +135,16 @@ namespace TeachLipSync
             {
                 bsValues[i] = 0.0f;
             }
-            SartServer();
+
+            if (lsMode == ELsMode.Online){
+                SartServer();
+            }
+            else if(lsMode == ELsMode.Offline) {
+                LoadOfflineData();
+            }
+            else {
+                Debug.LogError("INVALID ELsMode!");
+            }
         }
 
         // Update is called once per frame
@@ -119,18 +152,40 @@ namespace TeachLipSync
         {
             // Dont need UpdateForward yet, we shall update bs with values read from JSON directly
             // UpdateForward();
-            if (bIsConnectionEstablished && !videoPlayer.isPlaying)
-            {
-                videoPlayer.Play();
+
+            if (lsMode == ELsMode.Offline) {
+                UpdateOffline();
             }
-            if (lsType == LipSyncType.DeepL)
-            {
-                UpdateFaceDL();
+            else if (lsMode == ELsMode.Online) {
+                if (bIsConnectionEstablished && !videoPlayer.isPlaying)
+                {
+                    videoPlayer.Play();
+                }
+                if (lsType == LipSyncType.DeepL)
+                {
+                    UpdateFace();
+                }
+                else
+                {
+                    UpdateFaceFFT();
+                }
             }
-            else
-            {
-                UpdateFaceFFT();
+        }
+
+        private void UpdateOffline() {
+            timeElapsed += Time.deltaTime;
+            if (timeElapsed > dataFrameInterval) {
+                var jmpFrames = Mathf. FloorToInt(timeElapsed / dataFrameInterval);
+
+                // TODO 更新面部数据
+
+                timeElapsed -= jmpFrames * dataFrameInterval;
             }
+            UpdateFace();
+        }
+
+        private void LoadOfflineData() {
+            // TODO: 加载JSON数据
         }
 
         private float BSCalcWithUpperBound(float rawBSValue, float scale, float thres, float min, float max)
@@ -152,7 +207,6 @@ namespace TeachLipSync
         /// </summary>
         private void UpdateFaceFFT()
         {
-            
         }
 
         /// <summary>
@@ -169,7 +223,7 @@ namespace TeachLipSync
             return Mathf.Clamp(Mathf.Max(rawBSValue, thres) * scale, min, max);
         }
 
-        private void UpdateFaceDL()
+        private void UpdateFace()
         {
             for (int i = 0; i < propertyNames.Length; i++)
             {
