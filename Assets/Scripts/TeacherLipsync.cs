@@ -1,6 +1,7 @@
-using System.Text.RegularExpressions;
-using System.Threading;
-using System.Diagnostics;
+#define DEBUGGING
+using System.Net.Mime;
+using System.Collections;
+
 using System;
 using System.Net;
 using UnityEngine;
@@ -26,6 +27,22 @@ namespace TeachLipSync
         public int buffCount = 0;
     }
 
+    public class OfflineLsDataStruct
+    {
+        public Express[] data;
+    }
+
+    public class Express
+    {
+        public LsKv[] ExpressList;
+    }
+
+    public class LsKv
+    {
+        public int k;
+        public float v;
+    }
+
     /// <summary>
     /// 用于选择类型，是使用实时 FFT 解析口型还是远程链接深度学习模型
     /// </summary>
@@ -37,7 +54,7 @@ namespace TeachLipSync
 
     public class TeacherLipsync : MonoBehaviour
     {
-#region configs
+        #region configs
         public float moveTowardsSpeed = 8;
         /// <summary>
         /// BS 可以取的最小值
@@ -56,15 +73,25 @@ namespace TeachLipSync
 
         /// <summary>
         /// 数据的FPS
+        /// TODO: 做成配置项
         /// </summary>
         private float dataFrameInterval = 1.0f / 30f;
-#endregion
+
+        /// <summary>
+        /// 离线数据路径，相对于 Resource 文件夹的路径
+        /// </summary>
+        [SerializeField]
+        private string offlineLsDataPath;
+        #endregion
 
         /// <summary>
         /// 要更新的对象
         /// </summary>
         [SerializeField]
         private SkinnedMeshRenderer targetBlendShapeObject;
+
+        [SerializeField]
+        private AudioSource audioSrc;
 
         [SerializeField]
         private string[] propertyNames = new string[MAXBlendValueCount];
@@ -74,6 +101,9 @@ namespace TeachLipSync
 
         [SerializeField]
         private float[] propertyThres = new float[MAXBlendValueCount];
+
+        [SerializeField]
+        private RecorderHelper recorder;
 
         /// <summary>
         /// 视频播放器
@@ -102,6 +132,7 @@ namespace TeachLipSync
         private Dictionary<string, int> vowelToIndexDict = new Dictionary<string, int>();
         private string recognizeResult;
         private int[] propertyIndexs = new int[MAXBlendValueCount];
+        // 当前面部数据
         private float[] bsValues = new float[58];
         private bool bIsConnectionEstablished = false;
 
@@ -118,10 +149,34 @@ namespace TeachLipSync
 
         private float timeElapsed = 0.0f;
 
+
+        #region offlineLs
+        /// <summary>
+        /// 离线原始数据，需要由算法预处理好保存为一个 json 文件
+        /// </summary>
+        private string offlineLsData;
+
+        /// <summary>
+        /// 已经经过解析，要用来播放的数据
+        /// </summary>
+        private OfflineLsDataStruct curOfflineLsData;
+
+        /// <summary>
+        /// 播放到的帧
+        /// </summary>
+        private int curFrameIdx = 0;
+
+        /// <summary>
+        /// 离线数据的总的帧数
+        /// </summary>
+        private int frameCnt = 0;
+
+        private bool offlineStart = false;
+        #endregion
+
         // Start is called before the first frame update
         private void Start()
         {
-            Debug.Log("Test Started!");
             // set bs idx by string array
             for (int i = 0; i < propertyNames.Length; ++i)
             {
@@ -136,14 +191,17 @@ namespace TeachLipSync
                 bsValues[i] = 0.0f;
             }
 
-            if (lsMode == ELsMode.Online){
+            if (lsMode == ELsMode.Online)
+            {
                 SartServer();
             }
-            else if(lsMode == ELsMode.Offline) {
+            else if (lsMode == ELsMode.Offline)
+            {
                 LoadOfflineData();
             }
-            else {
-                Debug.LogError("INVALID ELsMode!");
+            else
+            {
+                UnityEngine.Debug.LogError("INVALID ELsMode!");
             }
         }
 
@@ -153,10 +211,28 @@ namespace TeachLipSync
             // Dont need UpdateForward yet, we shall update bs with values read from JSON directly
             // UpdateForward();
 
-            if (lsMode == ELsMode.Offline) {
-                UpdateOffline();
+            if (lsMode == ELsMode.Offline)
+            {
+                if (Input.GetKeyUp("p"))
+                {
+                    offlineStart = true;
+                }
+                if (offlineStart)
+                {
+                    UpdateOffline();
+                    if (!videoPlayer.isPlaying && !audioSrc.isPlaying)
+                    {
+                        videoPlayer.Play();
+                        audioSrc.Play();
+                        var audioLength = audioSrc.clip.length;
+                        UnityEngine.Debug.Log("start playing");
+                        StartCoroutine(StopPlaying(audioLength));
+                        recorder.StartRecording();
+                    }
+                }
             }
-            else if (lsMode == ELsMode.Online) {
+            else if (lsMode == ELsMode.Online)
+            {
                 if (bIsConnectionEstablished && !videoPlayer.isPlaying)
                 {
                     videoPlayer.Play();
@@ -172,20 +248,37 @@ namespace TeachLipSync
             }
         }
 
-        private void UpdateOffline() {
+        private void UpdateOffline()
+        {
             timeElapsed += Time.deltaTime;
-            if (timeElapsed > dataFrameInterval) {
-                var jmpFrames = Mathf. FloorToInt(timeElapsed / dataFrameInterval);
+            // Debug.Log($"curFrame: {curFrameIdx}, timeElapsed: {timeElapsed}");
+            if (timeElapsed > dataFrameInterval && curFrameIdx < frameCnt)
+            {
+                var jmpFrames = Mathf.FloorToInt(timeElapsed / dataFrameInterval);
 
-                // TODO 更新面部数据
+                // 更新面部数据
+                curFrameIdx += jmpFrames;
+                // 播放结束，停在最后一帧
+                curFrameIdx = Mathf.Min(curFrameIdx, frameCnt - 1);
+                var frame = curOfflineLsData.data[curFrameIdx];
+                DeserializeExpress(ref frame);
 
                 timeElapsed -= jmpFrames * dataFrameInterval;
             }
             UpdateFace();
         }
 
-        private void LoadOfflineData() {
+        private void LoadOfflineData()
+        {
             // TODO: 加载JSON数据
+            var t = Resources.Load<TextAsset>(offlineLsDataPath);
+            offlineLsData = t.text;
+            curOfflineLsData = JsonConvert.DeserializeObject<OfflineLsDataStruct>(offlineLsData);
+            frameCnt = curOfflineLsData.data.Length;
+            curFrameIdx = 0;
+#if DEBUGGING
+            UnityEngine.Debug.Log($"frame cnt: {frameCnt}, bs count: {curOfflineLsData.data[0].ExpressList.Length}");
+#endif
         }
 
         private float BSCalcWithUpperBound(float rawBSValue, float scale, float thres, float min, float max)
@@ -223,6 +316,9 @@ namespace TeachLipSync
             return Mathf.Clamp(Mathf.Max(rawBSValue, thres) * scale, min, max);
         }
 
+        /// <summary>
+        /// 根据当前缓存的数据更新模型面部 BS 值
+        /// </summary>
         private void UpdateFace()
         {
             for (int i = 0; i < propertyNames.Length; i++)
@@ -265,17 +361,33 @@ namespace TeachLipSync
         }
 
         /// <summary>
+        /// 解析 Express 内容
+        /// </summary>
+        /// <param name="express">json 文件解析出来的 Express 对象</param>
+        private void DeserializeExpress(ref Express express)
+        {
+            for (int i = 0; i < 58; ++i)
+            {
+                float tmp = express.ExpressList[i].v * 3;
+                tmp = tmp > 100.0f ? 100.0f : tmp;
+                tmp = tmp < 0.0f ? 0.0f : tmp;
+                bsValues[i] = tmp;
+            }
+        }
+
+        #region socket
+        /// <summary>
         /// 启动服务器
         /// </summary>
         private void SartServer()
         {
-            Debug.Log("Server starting");
+            UnityEngine.Debug.Log("Server starting");
             listenfd = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             IPAddress ipAdr = IPAddress.Parse("127.0.0.1");
             IPEndPoint ipEp = new IPEndPoint(ipAdr, 12345);
             listenfd.Bind(ipEp);
             listenfd.Listen(0);
-            Debug.Log("Server Started!");
+            UnityEngine.Debug.Log("Server Started!");
             listenfd.BeginAccept(AcceptCallback, listenfd);
         }
 
@@ -294,7 +406,7 @@ namespace TeachLipSync
             }
             catch (Exception e)
             {
-                Debug.Log(e.ToString());
+                UnityEngine.Debug.Log(e.ToString());
                 Console.WriteLine(e);
                 throw;
             }
@@ -312,7 +424,7 @@ namespace TeachLipSync
                 {
                     clientfd2.Close();
                     clients.Remove(clientfd2);
-                    Debug.Log("socket closed");
+                    UnityEngine.Debug.Log("socket closed");
                     return;
                 }
 
@@ -321,7 +433,7 @@ namespace TeachLipSync
             }
             catch (Exception e)
             {
-                Debug.Log(e.ToString());
+                UnityEngine.Debug.Log(e.ToString());
                 Console.WriteLine(e);
                 throw;
             }
@@ -349,9 +461,10 @@ namespace TeachLipSync
             state.buffCount -= start;
             // Debug.Log("new buffCnt: " + state.buffCount);
         }
+        #endregion
 
         /// <summary>
-        /// 更新面部 BS
+        /// 更新面部 BS，FFT用
         /// </summary>
         protected void UpdateForward()
         {
@@ -372,6 +485,18 @@ namespace TeachLipSync
                 }
             }
         }
+
+#region coroutines
+        private IEnumerator StopPlaying(float interval)
+        {
+            UnityEngine.Debug.Log("start waiting");
+            yield return new WaitForSeconds(interval);
+            offlineStart = false;
+            UnityEngine.Debug.Log("Stop Playing");
+            UnityEditor.EditorApplication.isPlaying = false;
+            Application.Quit();
+        }
+#endregion
     }
 
 }
