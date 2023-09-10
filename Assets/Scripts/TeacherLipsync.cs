@@ -13,6 +13,9 @@ using UnityEngine.Video;
 
 namespace TeachLipSync
 {
+    /// <summary>
+    /// 模式Enum，选择在线还是离线。目前在线仍有延迟问题，离线模式会读取 offlineLsDataPath 变量指定的 JSON 数据文件
+    /// </summary>
     public enum ELsMode
     {
         None = 0,
@@ -20,13 +23,16 @@ namespace TeachLipSync
         Online = 2
     }
 
+    /// <summary>
+    /// 在线模式使用到的缓冲区、Socket
+    /// </summary>
     class ClientState
     {
         public Socket socket;
         public byte[] readBuff = new byte[2048];
         public int buffCount = 0;
     }
-
+#region json data def
     public class OfflineLsDataStruct
     {
         public Express[] data;
@@ -42,9 +48,10 @@ namespace TeachLipSync
         public int k;
         public float v;
     }
+#endregion
 
     /// <summary>
-    /// 用于选择类型，是使用实时 FFT 解析口型还是远程链接深度学习模型
+    /// 用于选择类型，是使用实时 FFT 解析口型（目前无法使用，缺乏相应的口型）还是远程链接深度学习模型
     /// </summary>
     enum LipSyncType
     {
@@ -90,18 +97,30 @@ namespace TeachLipSync
         [SerializeField]
         private SkinnedMeshRenderer targetBlendShapeObject;
 
+        /// <summary>
+        /// 音频播放的地方，主要目的是能够被录像用的摄像机捕捉到声音
+        /// </summary>
         [SerializeField]
         private AudioSource audioSrc;
 
+        /// <summary>
+        /// 模型上的 BS 名字，需要手动在编辑器中进行配置
+        /// </summary>
         [SerializeField]
         private string[] propertyNames = new string[MAXBlendValueCount];
 
+        /// <summary>
+        /// BS 放大系数，用于细调效果
+        /// </summary>
         [SerializeField]
         private float[] propertyScales = new float[MAXBlendValueCount];
 
         [SerializeField]
         private float[] propertyThres = new float[MAXBlendValueCount];
 
+        /// <summary>
+        /// 录像用的组件
+        /// </summary>
         [SerializeField]
         private RecorderHelper recorder;
 
