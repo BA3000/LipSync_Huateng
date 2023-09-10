@@ -11,8 +11,12 @@ public class RecorderHelper : MonoBehaviour
 {
     RecorderController m_RecorderController;
 
-    void OnEnable()
+    private void OnEnable()
     {
+        InitRecorder();
+    }
+
+    private void InitRecorder() {
         var controllerSettings = ScriptableObject.CreateInstance<RecorderControllerSettings>();
         m_RecorderController = new RecorderController(controllerSettings);
 

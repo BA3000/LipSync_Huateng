@@ -23,7 +23,7 @@ ModelImporter:
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
     importConstraints: 0
-    animationCompression: 1
+    animationCompression: 3
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
@@ -77,7 +77,292 @@ ModelImporter:
   humanDescription:
     serializedVersion: 3
     human: []
-    skeleton: []
+    skeleton:
+    - name: Male teacher09(Clone)
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Male_teacher09_0008:joint1
+      parentName: Male teacher09(Clone)
+      position: {x: -0.00018874604, y: 0.7541338, z: 0.026284935}
+      rotation: {x: -0.4907291, y: 0.50910217, z: -0.4907291, w: 0.50910217}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Male_teacher09_0008:joint2
+      parentName: Male_teacher09_0008:joint1
+      position: {x: -0.2358777, y: 4.961309e-17, z: 2.1684043e-17}
+      rotation: {x: 0.99785846, y: -0.065409906, z: -3.6551384e-17, w: 5.89678e-17}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Male_teacher09_0008:joint3
+      parentName: Male_teacher09_0008:joint2
+      position: {x: -0.3133686, y: 7.105427e-17, z: -1.9220736e-17}
+      rotation: {x: 0.99530727, y: -0.09676525, z: -0.0000000014284132, w: -1.3887239e-10}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Male_teacher09_0008:joint4
+      parentName: Male_teacher09_0008:joint3
+      position: {x: -0.15147774, y: 0.0029546954, z: -3.4672912e-10}
+      rotation: {x: 0.99749064, y: -0.07079825, z: -6.821807e-10, w: -4.841864e-11}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Male_teacher09_0008:joint5
+      parentName: Male_teacher09_0008:joint4
+      position: {x: -0.690161, y: 0.0064840578, z: -5.820862e-10}
+      rotation: {x: -0.1200557, y: 0.99276716, z: 0.00000013307336, w: -0.000000008722609}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Male_teacher09_0008:joint7
+      parentName: Male_teacher09_0008:joint3
+      position: {x: -0.033810254, y: 0.00889464, z: -0.07856977}
+      rotation: {x: -0.303663, y: 0.6385834, z: -0.6051987, w: -0.36569732}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Male_teacher09_0008:joint8
+      parentName: Male_teacher09_0008:joint7
+      position: {x: -0.18075724, y: 0.0009488954, z: -2.1255525e-19}
+      rotation: {x: 0, y: -0, z: -0.30488086, w: 0.95239055}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Male_teacher09_0008:joint9
+      parentName: Male_teacher09_0008:joint8
+      position: {x: -0.29224408, y: -0.003305209, z: -0.021050168}
+      rotation: {x: 0, y: 0, z: 0.032736637, w: 0.99946404}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Male_teacher09_0008:joint10
+      parentName: Male_teacher09_0008:joint9
+      position: {x: -0.25892958, y: 0.0016529848, z: 0.01779867}
+      rotation: {x: 0, y: -0, z: -0.014615198, w: 0.9998932}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Male_teacher09_0008:joint11
+      parentName: Male_teacher09_0008:joint10
+      position: {x: -0.047528286, y: -0.0029420133, z: 0.05030706}
+      rotation: {x: 1.3596823e-18, y: 0.39190173, z: -3.1919159e-18, w: 0.9200071}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Male_teacher09_0008:joint12
+      parentName: Male_teacher09_0008:joint11
+      position: {x: -0.070649415, y: -0.005794528, z: 6.1113057e-17}
+      rotation: {x: 0, y: -0.23947246, z: -0, w: 0.97090316}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Male_teacher09_0008:joint13
+      parentName: Male_teacher09_0008:joint12
+      position: {x: -0.06192807, y: -0.01830305, z: -0.0037501699}
+      rotation: {x: 0, y: -0.16018224, z: -0, w: 0.9870875}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Male_teacher09_0008:joint14
+      parentName: Male_teacher09_0008:joint10
+      position: {x: -0.16894776, y: 0.037349824, z: 0.038202547}
+      rotation: {x: 3.0430236e-20, y: 0.0087709185, z: -3.4693136e-18, w: 0.99996156}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Male_teacher09_0008:joint15
+      parentName: Male_teacher09_0008:joint14
+      position: {x: -0.05694799, y: -0.0076943706, z: 4.2577967e-16}
+      rotation: {x: 0, y: -0.085638344, z: -0, w: 0.9963263}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Male_teacher09_0008:joint16
+      parentName: Male_teacher09_0008:joint15
+      position: {x: -0.047376566, y: -0.014760692, z: 0.0028025361}
+      rotation: {x: 0, y: 0.076896355, z: -0, w: 0.99703914}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Male_teacher09_0008:joint17
+      parentName: Male_teacher09_0008:joint10
+      position: {x: -0.16884074, y: 0.026256748, z: -0.006063489}
+      rotation: {x: -1.1225914e-19, y: -0.032356493, z: -3.4676305e-18, w: 0.9994764}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Male_teacher09_0008:joint18
+      parentName: Male_teacher09_0008:joint17
+      position: {x: -0.054055616, y: -0.012102064, z: -5.3618972e-17}
+      rotation: {x: 0, y: 0.039597653, z: -0, w: 0.9992157}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Male_teacher09_0008:joint19
+      parentName: Male_teacher09_0008:joint18
+      position: {x: -0.048860807, y: -0.028476879, z: 0.0018177923}
+      rotation: {x: 0, y: -0.007245806, z: -0, w: 0.9999738}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Male_teacher09_0008:joint20
+      parentName: Male_teacher09_0008:joint10
+      position: {x: -0.15693974, y: 0.014473431, z: -0.03759912}
+      rotation: {x: -1.60437e-19, y: -0.04624282, z: -3.4657356e-18, w: 0.9989303}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Male_teacher09_0008:joint21
+      parentName: Male_teacher09_0008:joint20
+      position: {x: -0.058449328, y: -0.023688823, z: -0.0030413617}
+      rotation: {x: 0, y: 0.083825275, z: -0, w: 0.99648046}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Male_teacher09_0008:joint22
+      parentName: Male_teacher09_0008:joint21
+      position: {x: -0.02618319, y: -0.02538334, z: 0.000027459824}
+      rotation: {x: 0, y: -0.037655547, z: -0, w: 0.9992908}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Male_teacher09_0008:joint23
+      parentName: Male_teacher09_0008:joint10
+      position: {x: -0.13772382, y: -0.010883444, z: -0.0665682}
+      rotation: {x: -2.1682774e-20, y: -0.006249634, z: -3.4693795e-18, w: 0.9999805}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Male_teacher09_0008:joint24
+      parentName: Male_teacher09_0008:joint23
+      position: {x: -0.039960478, y: -0.022304323, z: -1.8723925e-16}
+      rotation: {x: 0, y: 0.07712155, z: -0, w: 0.99702173}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Male_teacher09_0008:joint25
+      parentName: Male_teacher09_0008:joint24
+      position: {x: -0.02092416, y: -0.017960925, z: -0.0018649871}
+      rotation: {x: 0, y: -0.07088902, z: -0, w: 0.9974842}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Male_teacher09_0008:joint34
+      parentName: Male_teacher09_0008:joint3
+      position: {x: -0.033807255, y: 0.008894336, z: 0.078947246}
+      rotation: {x: -0.6385834, y: -0.30366296, z: -0.36569738, w: 0.6051987}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Male_teacher09_0008:joint35
+      parentName: Male_teacher09_0008:joint34
+      position: {x: 0.17088455, y: 0.005567436, z: 8.296127e-11}
+      rotation: {x: 0.000000014191725, y: -2.2961594e-16, z: -0.30488086, w: 0.95239055}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Male_teacher09_0008:joint36
+      parentName: Male_teacher09_0008:joint35
+      position: {x: 0.27057123, y: 0.002518671, z: 0.021050198}
+      rotation: {x: 0.000000012897868, y: 0.000000005230099, z: 0.032736637, w: 0.99946404}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Male_teacher09_0008:joint37
+      parentName: Male_teacher09_0008:joint36
+      position: {x: 0.26385596, y: -0.0018025613, z: -0.017798703}
+      rotation: {x: 0.000000023558288, y: 0.0000000038683248, z: -0.014615198, w: 0.9998932}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Male_teacher09_0008:joint38
+      parentName: Male_teacher09_0008:joint37
+      position: {x: 0.047528, y: 0.0029399954, z: -0.050307103}
+      rotation: {x: 0.000000039968764, y: 0.39190173, z: -0.000000051391382, w: 0.9200071}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Male_teacher09_0008:joint39
+      parentName: Male_teacher09_0008:joint38
+      position: {x: 0.07064956, y: 0.0058, z: 0.00000019128203}
+      rotation: {x: 0.00000008497781, y: -0.23947246, z: 0.00000006276617, w: 0.97090316}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Male_teacher09_0008:joint40
+      parentName: Male_teacher09_0008:joint39
+      position: {x: 0.061928086, y: 0.0183, z: 0.003750012}
+      rotation: {x: 0.00000017294512, y: -0.16018224, z: 0.00000008406906, w: 0.9870875}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Male_teacher09_0008:joint41
+      parentName: Male_teacher09_0008:joint37
+      position: {x: 0.168948, y: -0.037350003, z: -0.038202498}
+      rotation: {x: 0.000000043442306, y: 0.008770922, z: -0.000000001150161, w: 0.99996156}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Male_teacher09_0008:joint42
+      parentName: Male_teacher09_0008:joint41
+      position: {x: 0.056948762, y: 0.0076999995, z: -0.00000005396752}
+      rotation: {x: 0.000000086568754, y: -0.085638344, z: 0.00000002162854, w: 0.9963263}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Male_teacher09_0008:joint43
+      parentName: Male_teacher09_0008:joint42
+      position: {x: 0.0473805, y: 0.014759999, z: -0.0028031545}
+      rotation: {x: 0.0000001740558, y: 0.076896355, z: -0.000000040219188, w: 0.99703914}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Male_teacher09_0008:joint44
+      parentName: Male_teacher09_0008:joint37
+      position: {x: 0.16884099, y: -0.02625, z: 0.006063491}
+      rotation: {x: 0.00000004342123, y: -0.03235649, z: 0.000000004243014, w: 0.9994764}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Male_teacher09_0008:joint45
+      parentName: Male_teacher09_0008:joint44
+      position: {x: 0.054060176, y: 0.0121, z: -0.0000002563892}
+      rotation: {x: 0.00000008681981, y: 0.039597653, z: -0.000000007509696, w: 0.9992157}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Male_teacher09_0008:joint46
+      parentName: Male_teacher09_0008:joint45
+      position: {x: 0.048851475, y: 0.028469998, z: -0.0018179828}
+      rotation: {x: 0.00000017409049, y: -0.007245806, z: -2.8577837e-10, w: 0.9999738}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Male_teacher09_0008:joint47
+      parentName: Male_teacher09_0008:joint37
+      position: {x: 0.15694, y: -0.014469996, z: 0.0375991}
+      rotation: {x: 0.000000042754543, y: -0.046242815, z: 0.0000000060342096, w: 0.9989303}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Male_teacher09_0008:joint48
+      parentName: Male_teacher09_0008:joint47
+      position: {x: 0.058448955, y: 0.023690002, z: 0.0030413975}
+      rotation: {x: 0.00000008689988, y: 0.083825275, z: -0.000000017765364, w: 0.99648046}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Male_teacher09_0008:joint49
+      parentName: Male_teacher09_0008:joint48
+      position: {x: 0.026186313, y: 0.02538, z: -0.000027265269}
+      rotation: {x: 0.00000017333318, y: -0.037655547, z: 0.000000019621915, w: 0.9992908}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Male_teacher09_0008:joint50
+      parentName: Male_teacher09_0008:joint37
+      position: {x: 0.137724, y: 0.010890005, z: 0.066568196}
+      rotation: {x: 0.000000043443134, y: -0.00624963, z: 8.195343e-10, w: 0.9999805}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Male_teacher09_0008:joint51
+      parentName: Male_teacher09_0008:joint50
+      position: {x: 0.03996012, y: 0.0223, z: 0.0000000336043}
+      rotation: {x: 0.00000008694708, y: 0.07712155, z: -0.000000019645029, w: 0.99702173}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Male_teacher09_0008:joint52
+      parentName: Male_teacher09_0008:joint51
+      position: {x: 0.02092455, y: 0.01796, z: 0.0018650162}
+      rotation: {x: 0.00000017381602, y: -0.07088902, z: 0.000000037097386, w: 0.9974842}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Male_teacher09_0008:joint26
+      parentName: Male_teacher09_0008:joint1
+      position: {x: -0.053069953, y: 0.009059641, z: -0.14257509}
+      rotation: {x: 1.539003e-16, y: 8.09505e-17, z: 0.9991767, w: 0.04057051}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Male_teacher09_0008:joint27
+      parentName: Male_teacher09_0008:joint26
+      position: {x: -0.3868975, y: 0.0004596083, z: 6.186592e-17}
+      rotation: {x: 0.9934621, y: 0.1141628, z: -2.1701408e-17, w: 6.412911e-17}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Male_teacher09_0008:joint28
+      parentName: Male_teacher09_0008:joint27
+      position: {x: -0.28856474, y: -2.0428103e-16, z: -1.6667893e-17}
+      rotation: {x: 0.63899696, y: 0.76920927, z: 2.2811357e-16, w: -1.7877197e-16}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Male_teacher09_0008:joint29
+      parentName: Male_teacher09_0008:joint28
+      position: {x: -0.15138976, y: -6.362727e-17, z: -3.321651e-17}
+      rotation: {x: -0, y: -0.7071068, z: 0, w: 0.7071068}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Male_teacher09_0008:joint30
+      parentName: Male_teacher09_0008:joint1
+      position: {x: -0.053069767, y: 0.009059629, z: 0.12326228}
+      rotation: {x: -4.2724255e-16, y: -1.6505149e-16, z: -0.040570546, w: 0.9991767}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Male_teacher09_0008:joint31
+      parentName: Male_teacher09_0008:joint30
+      position: {x: 0.38689756, y: -0.00045956395, z: -1.5987211e-16}
+      rotation: {x: 0.9934621, y: 0.1141628, z: -6.990456e-18, w: -6.0832014e-17}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Male_teacher09_0008:joint32
+      parentName: Male_teacher09_0008:joint31
+      position: {x: 0.28856468, y: 0.0000000117150405, z: 1.0658141e-16}
+      rotation: {x: 0.63899696, y: 0.76920927, z: 1.5118585e-16, w: -8.616821e-17}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Male_teacher09_0008:joint33
+      parentName: Male_teacher09_0008:joint32
+      position: {x: 0.1513901, y: -4.6185276e-16, z: -3.5527136e-17}
+      rotation: {x: -0.0000000052683564, y: -0.7071068, z: -0.0000000052683564, w: 0.7071068}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Male_teacher09_0008:joint53
+      parentName: Male teacher09(Clone)
+      position: {x: -0, y: 0.38863078, z: 1.2968348}
+      rotation: {x: -0.49791238, y: 0.50207895, z: -0.49791238, w: 0.50207895}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Male_teacher09_0008:joint54
+      parentName: Male_teacher09_0008:joint53
+      position: {x: -0.21887176, y: 9.6589404e-17, z: 4.8599293e-17}
+      rotation: {x: -9.074896e-28, y: 1.1111563e-16, z: 0.00042045704, w: 0.99999994}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Male_teacher09_0008:pSphere1
+      parentName: Male teacher09(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Male_teacher09_0008:renwuShape
+      parentName: Male teacher09(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Male_teacher09_0008:shuben
+      parentName: Male teacher09(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
     armTwist: 0.5
     foreArmTwist: 0.5
     upperLegTwist: 0.5
@@ -88,14 +373,13 @@ ModelImporter:
     globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
-    hasExtraRoot: 0
+    hasExtraRoot: 1
     skeletonHasParents: 1
-  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: d07c1afc21560414ea8199861be39f01,
-    type: 3}
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
-  avatarSetup: 2
+  avatarSetup: 1
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
   remapMaterialsIfMaterialImportModeIsNone: 0
   additionalBone: 0
