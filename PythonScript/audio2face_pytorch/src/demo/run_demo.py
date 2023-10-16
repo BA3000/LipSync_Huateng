@@ -455,5 +455,5 @@ if __name__ == "__main__":
     if args.real_time:
         run_real_time()
     else:
-        # generate_bs_by_wav()
-        sent_bs_json_data()
+        generate_bs_by_wav()
+        # sent_bs_json_data()
