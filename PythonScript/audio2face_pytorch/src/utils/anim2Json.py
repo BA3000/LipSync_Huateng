@@ -11,10 +11,10 @@ import json
 
 ### config
 INPUT_FILE_PATH = "data\\test_demo\\rjbwks6091"
-OUT_PATH = "data\\test_demo"
 
 def main():
     inputFileName = os.path.basename(INPUT_FILE_PATH)
+    inputPath = os.path.dirname(INPUT_FILE_PATH)
     outContent = dict()
     outContent["data"] = []
     if os.path.exists(INPUT_FILE_PATH):
@@ -25,7 +25,7 @@ def main():
         print("ERR: PATH DOES NOT EXIST!")
     res = json.dumps(outContent)
     outFileName = inputFileName.split(".")[0] + ".json"
-    outFilePath = os.path.join(OUT_PATH, outFileName)
+    outFilePath = os.path.join(inputPath, outFileName)
     with open(outFilePath, 'w') as f:
         f.write(res)
 
